@@ -4,7 +4,7 @@ import {
 } from 'frontend/actions'
 
 export function settings(state = {}, action) {
-    console.log(action)
+    // console.log(action)
     switch (action.type) {
         case GET_AUDIO_INPUTS:
             const audioDevices = action.audioDevices

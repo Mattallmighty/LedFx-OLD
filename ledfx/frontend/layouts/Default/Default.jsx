@@ -26,14 +26,14 @@ const defaultTheme = createMuiTheme({
     secondary: green
   },
   overrides: {
-      MuiFormControl: {
-        root: {
-          margin: 8,
-          minWidth: 225,
-          flex: "1 0 30%"
-        },
+    MuiFormControl: {
+      root: {
+        margin: 8,
+        minWidth: 225,
+        flex: "1 0 30%"
       },
     },
+  },
 });
 
 class DefaultLayout extends React.Component {
@@ -91,14 +91,17 @@ class DefaultLayout extends React.Component {
                 if (prop.redirect) {
                   return <Redirect from={prop.path} to={prop.to} key={key} />;
                 }
-                return (
-                  <Route
-                    exact
-                    path={prop.path}
-                    component={prop.component}
-                    key={key}
-                  />
-                );
+                if (typeof (prop.component) === "function") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      component={prop.component}
+                      key={key}
+                    />
+                  );
+                }
+                return;
               })}
             </Switch>
           </div>

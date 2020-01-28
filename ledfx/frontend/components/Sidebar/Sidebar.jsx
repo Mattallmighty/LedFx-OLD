@@ -23,17 +23,16 @@ class Sidebar extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
       devMode: false
     }
     getSystemConfig().then(json => {
       var devMode = false;
-      if (json.config.dev_mode)
-      {
+      if (json.config.dev_mode) {
         devMode = true;
       }
-      this.setState({devMode: devMode});
+      this.setState({ devMode: devMode });
     });
   }
 
@@ -42,12 +41,11 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { classes, color, devicesById } = this.props;
+    const { classes, devicesById } = this.props;
 
     var deviceLinks = Object.keys(devicesById).map(deviceId => {
       var listItemClass = classes.itemLink
-      if (this.isViewActive("/devices/" + deviceId))
-      {
+      if (this.isViewActive("/devices/" + deviceId)) {
         listItemClass = listItemClass + " " + classes.activeView
       }
       return (
@@ -61,7 +59,7 @@ class Sidebar extends React.Component {
             <ListItemText
               primary={devicesById[deviceId].config.name}
               className={classes.devicesItemText}
-              disableTypography={true}/>
+              disableTypography={true} />
           </ListItem>
         </NavLink>
       );
@@ -87,48 +85,55 @@ class Sidebar extends React.Component {
               listItemClass = listItemClass + " " + classes.activeView
             }
 
-            if (prop.sidebarName === "Devices")
-            {
+            if (prop.sidebarName === "Devices") {
               return (
-                <ListItem button className={listItemClass}>
-                <ListItemIcon className={classes.itemIcon}>
-                  <prop.icon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={prop.sidebarName}
-                  className={classes.itemText}
-                  disableTypography={true}/>
+                <ListItem
+                  button
+                  className={listItemClass}
+                  key={key}
+                >
+                  <ListItemIcon className={classes.itemIcon}>
+                    <prop.icon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={prop.sidebarName}
+                    className={classes.itemText}
+                    disableTypography={true} />
                   <List className={classes.list}>
                     {deviceLinks}
-                  </List>  
+                  </List>
                 </ListItem>
               );
             }
 
-            if (prop.sidebarName === "EffectPresets")
-            {
+            if (prop.sidebarName === "EffectPresets") {
               return (
-                <ListItem button className={listItemClass}>
-                <ListItemIcon className={classes.itemIcon}>
-                  <prop.icon />
-                </ListItemIcon>
-                <ListItemText
-                  primary={prop.sidebarName}
-                  className={classes.itemText}
-                  disableTypography={true}/>
+                <ListItem
+                  button
+                  className={listItemClass}
+                  key={key}
+                >
+                  <ListItemIcon className={classes.itemIcon}>
+                    <prop.icon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={prop.sidebarName}
+                    className={classes.itemText}
+                    disableTypography={true} />
                   <List className={classes.list}>
                     {effectLinks}
-                  </List>  
+                  </List>
                 </ListItem>
               );
             }
-            
+
             return (
               <NavLink
                 to={prop.path}
                 className={classes.item}
                 activeClassName="active"
-                key={key}>
+                key={key}
+              >
                 <ListItem button className={listItemClass}>
                   <ListItemIcon className={classes.itemIcon}>
                     <prop.icon />
@@ -136,7 +141,7 @@ class Sidebar extends React.Component {
                   <ListItemText
                     primary={prop.sidebarName}
                     className={classes.itemText}
-                    disableTypography={true}/>
+                    disableTypography={true} />
                 </ListItem>
               </NavLink>
             );
@@ -173,7 +178,7 @@ class Sidebar extends React.Component {
 
             {logo}
             <div className={classes.sidebarWrapper}>{links}</div>
-            <div className={classes.background}/>
+            <div className={classes.background} />
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
@@ -186,7 +191,7 @@ class Sidebar extends React.Component {
 
             {logo}
             <div className={classes.sidebarWrapper}>{links}</div>
-            <div className={classes.background}/>
+            <div className={classes.background} />
           </Drawer>
         </Hidden>
       </div>
@@ -207,4 +212,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default  connect(mapStateToProps)(withStyles(sidebarStyle)(Sidebar));
+export default connect(mapStateToProps)(withStyles(sidebarStyle)(Sidebar));

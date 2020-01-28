@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
-
 import DevicesTableItem from 'frontend/components/DevicesTable/DevicesTableItem.jsx'
 import { deleteDevice } from 'frontend/actions'
 
@@ -18,7 +17,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing(4),
   }, 
   table: {
     marginBottom: "0",
@@ -57,7 +56,7 @@ class DevicesTable extends React.Component {
             <TableCell className={classes.tableCell}>IP Address</TableCell>
             <TableCell className={classes.tableCell}>Pixel Count</TableCell>
             <TableCell className={classes.tableCell}>Type</TableCell>
-            <TableCell className={classes.tableCell} numeric>Manage</TableCell>
+            <TableCell className={classes.tableCell}>Manage</TableCell>
           </TableRow>
         </TableHead>
 

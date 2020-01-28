@@ -19,15 +19,15 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: red[700],
     },
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     float: "right"
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     float: "right"
   },
   submitControls: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     display: "block",
     width: "100%"
   },
@@ -58,7 +58,7 @@ class PresetCard extends React.Component {
             </Button>
             <Button
               className={classes.deleteButton}
-              color="red"
+              color="secondary"
               size="small"
               aria-label="Delete"
               variant = "contained"
