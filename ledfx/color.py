@@ -84,5 +84,9 @@ GRADIENTS = {
     "Christmas" : { 
         "colors": ["red", "red", "red", "red", "red", "green", "green", "green", "green", "green"],
         "method": "repeat"
+    },
+    "Strobe" : { 
+        "colors": ["white"],
+        "method": "repeat"
     }
 }
