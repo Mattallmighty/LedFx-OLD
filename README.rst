@@ -1,4 +1,4 @@
-LedFx
+LedFx Fork with Midi Support
 ================================================================================= 
 |License| |Discord|
 
