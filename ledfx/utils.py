@@ -31,8 +31,8 @@ def install_package(package):
 
 def import_or_install(package):
     try:
-        print("imported package")
         return importlib.import_module(package)
+        print("imported package")
     except ImportError:
         install_package(package)
         try:

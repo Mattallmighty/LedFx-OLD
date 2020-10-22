@@ -8,7 +8,7 @@ from pathlib import Path
 import voluptuous as vol
 from concurrent.futures import ThreadPoolExecutor
 from ledfx.utils import async_fire_and_forget
-from ledfx.http1 import HttpServer
+from ledfx.http import HttpServer
 from ledfx.devices import Devices
 from ledfx.effects import Effects
 from ledfx.config import load_config, save_config, load_default_presets
@@ -40,9 +40,6 @@ class LedFxCore(object):
 
     def dev_enabled(self):
         return self.config['dev_mode'] == True
-
-    def spotify_enabled(self):
-        return self.config['spotify_enabled'] == True
 
     def loop_exception_handler(self, loop, context):
         kwargs = {}
@@ -117,10 +114,7 @@ class LedFxCore(object):
         self.events.fire_event(LedFxShutdownEvent())
         await asyncio.sleep(0, loop=self.loop)
 
-        try:
-            await self.http.stop()
-        except:
-            print('Failed to stop http server')
+        await self.http.stop()
 
         # Cancel all the remaining task and wait
         tasks = [task for task in asyncio.Task.all_tasks() if task is not

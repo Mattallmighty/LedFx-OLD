@@ -10,6 +10,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import DevicesTable from 'components/DevicesTable';
 import DeviceConfigDialog from 'components/DeviceConfigDialog';
+import DeviceAutoAddDialog from 'components/DeviceAutoAddDialog';
 import { addDevice, deleteDevice, updateDeviceConfig, fetchDeviceList } from 'modules/devices';
 
 const styles = theme => ({
@@ -44,6 +45,10 @@ class DevicesView extends React.Component {
         this.setState({ selectedDevice: {}, addDialogOpened: true });
     };
 
+    openAutoAddDialog = () => {
+        this.setState({ selectedDevice: {}, addDialogOpened: true });
+    };
+    
     closeAddDeviceDialog = () => {
         this.setState({ selectedDevice: {}, addDialogOpened: false });
     };
@@ -83,6 +88,24 @@ class DevicesView extends React.Component {
                                             <Grid item
                                                 display='flex'
                                                 justifyContent='flex-end' >
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    aria-label="Add"
+                                                    className={classes.button}
+                                                    onClick={this.openAutoAddDialog}
+                                                    endIcon={<AddCircleIcon />}
+                                                >
+                                                    WLED Auto add
+                                                </Button>
+                                                <openAutoAddDialog
+                                                    open={addDialogOpened}
+                                                    onClose={this.closeAddDeviceDialog}
+                                                    deviceTypes={schemas.deviceTypes}
+                                                    onAddDevice={addDevice}
+                                                    initial={selectedDevice}
+                                                    onUpdateDevice={updateDeviceConfig}
+                                                />
                                                 <Button
                                                     variant="contained"
                                                     color="primary"
