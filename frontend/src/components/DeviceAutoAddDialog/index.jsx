@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SchemaForm, utils } from 'react-schema-form';
-import clsx from 'clsx';
+import utils from 'react-schema-form';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import Box from '@material-ui/core/Box';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
-
-import DropDown from 'components/forms/DropDown';
-import AdditionalProperties from './AdditionalProperties';
 
 const styles = theme => ({
     form: {
@@ -39,16 +34,7 @@ const styles = theme => ({
     },
 });
 
-class openAutoAddDialog extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            deviceType: '',
-            model: {},
-            additionalPropertiesOpen: false,
-        };
-    }
+class DeviceAutoAddDialog extends React.Component {
 
     componentDidMount() {
         const { initial } = this.props;
@@ -120,57 +106,20 @@ class openAutoAddDialog extends React.Component {
                 disableBackdropClick
                 open={open}
             >
-                <DialogTitle id="form-dialog-title">Add Device</DialogTitle>
+                <DialogTitle id="form-dialog-title">Auto scan and add WLED Devices</DialogTitle>
                 <DialogContent className={classes.cardResponsive}>
                     <DialogContentText>
-                        2To add a device to LedFx, please first select the type of device you wish to
-                        add then provide the necessary configuration.
+                        Ensure all WLED devices are powered on, and connected to your Wi-Fi.
+                        From the WLED web-interface, LedFx will require led setup configured, 
+                        user interface name, and Sync setup enabled E1.31 support.
+
+                        Note, this will delete current LedFx devices, 
+                        scan your network for WLED,
+                        and automatically add all devices found to LedFx.
+                        Are you sure you wish to continue?
                     </DialogContentText>
-                    <form onSubmit={this.handleSubmit} className={classes.form}>
-                        <DropDown
-                            label="Type"
-                            value={deviceType}
-                            options={Object.keys(deviceTypes).map(key => ({
-                                value: key,
-                                display: key,
-                            }))}
-                            onChange={this.handleTypeChange}
-                        />
-
-                        <SchemaForm
-                            className={classes.schemaForm}
-                            schema={currentSchema}
-                            form={requiredKeys}
-                            model={model}
-                            onModelChange={this.onModelChange}
-                        />
-
-                        {showAdditionalUi && (
-                            <AdditionalProperties
-                                schema={currentSchema}
-                                form={optionalKeys}
-                                model={model}
-                                onChange={this.onModelChange}
-                                open={additionalPropertiesOpen}
-                            />
-                        )}
 
                         <DialogActions className={classes.bottomContainer}>
-                            {showAdditionalUi && (
-                                <Button
-                                    size="medium"
-                                    className={classes.additionalButton}
-                                    onClick={this.toggleShowAdditional}
-                                >
-                                    <ExpandMoreIcon
-                                        color="disabled"
-                                        className={clsx({
-                                            [classes.expandIcon]: additionalPropertiesOpen,
-                                        })}
-                                    />
-                                    {`Show ${!additionalPropertiesOpen ? 'More' : 'Less'}`}
-                                </Button>
-                            )}
                             <Box
                                 flex={1}
                                 display="flex"
@@ -195,19 +144,18 @@ class openAutoAddDialog extends React.Component {
                                 </Button>
                             </Box>
                         </DialogActions>
-                    </form>
                 </DialogContent>
             </Dialog>
         );
     }
 }
 
-export default withStyles(styles)(openAutoAddDialog);
+export default withStyles(styles)(DeviceAutoAddDialog);
 
-openAutoAddDialog.propTypes = {
+DeviceAutoAddDialog.propTypes = {
     deviceTypes: PropTypes.object,
 };
 
-openAutoAddDialog.defaultProps = {
+DeviceAutoAddDialog.defaultProps = {
     deviceTypes: {},
 };

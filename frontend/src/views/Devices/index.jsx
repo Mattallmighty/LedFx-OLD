@@ -96,7 +96,7 @@ class DevicesView extends React.Component {
                                                     onClick={this.openAutoAddDialog}
                                                     endIcon={<AddCircleIcon />}
                                                 >
-                                                    WLED Auto add
+                                                    WLED Autoadd
                                                 </Button>
                                                 <openAutoAddDialog
                                                     open={addDialogOpened}
