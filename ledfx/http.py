@@ -4,11 +4,15 @@ import aiohttp_jinja2
 from aiohttp import web
 import aiohttp
 from ledfx.api import RestApi
+from ledfx.consts import PROJECT_VERSION
 import numpy as np
 import json
+import sys
 import ledfx_frontend
 
 _LOGGER = logging.getLogger(__name__)
+
+print('Loading LedFx Version: {}, Python Version: {}'.format((PROJECT_VERSION), (sys.version)))
 
 class HttpServer(object):
     def __init__(self, ledfx, host, port):
