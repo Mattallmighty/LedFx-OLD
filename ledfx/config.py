@@ -1,6 +1,5 @@
 import voluptuous as vol
 import logging
-import socket
 import yaml
 import sys
 import os
@@ -10,10 +9,9 @@ _LOGGER = logging.getLogger(__name__)
 CONFIG_DIRECTORY = '.ledfx'
 CONFIG_FILE_NAME = 'config.yaml'
 DEFAULT_PRESETS_FILE_NAME = 'default_presets.yaml'
-hostname = socket.gethostbyname(socket.gethostname())
 
 CORE_CONFIG_SCHEMA = vol.Schema({
-    vol.Optional('host', default = hostname): str,
+    vol.Optional('host', default = '127.0.0.1'): str,
     vol.Optional('port', default = 8888): int,
     vol.Optional('dev_mode', default = False): bool,
     vol.Optional('max_workers', default = 10): int,
