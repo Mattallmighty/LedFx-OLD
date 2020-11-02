@@ -26,6 +26,9 @@ cache:
   directories:
     - $HOME/.cache/pip
     - "node_modules"
+    - "frontend"
+    - yarn
+    
 before_install:
   - sudo apt-get update
   - sudo apt-get install portaudio19-dev # Install portaudio (requirement for pyaudio)
@@ -37,10 +40,9 @@ install:
 
 script:
   # Build the frontend first
-  - cd frontend
-  - yarn 
+  - yarn install
   - yarn build
-  - cd ..
+  - build
   # Then, build the backend
   - travis_wait 60 tox --develop
   # Finally, build the docs
