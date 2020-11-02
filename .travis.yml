@@ -34,15 +34,13 @@ before_install:
   - sudo apt-get install portaudio19-dev # Install portaudio (requirement for pyaudio)
 install:
   - npm install
-  - npm install -g yarn
+  - yarn --frozen-lockfile
   - pip install tox-travis
   - pip install -r docs/requirements_docs.txt
 
 script:
   # Build the frontend first
-  - yarn install
   - yarn build
-  - build
   # Then, build the backend
   - travis_wait 60 tox --develop
   # Finally, build the docs
