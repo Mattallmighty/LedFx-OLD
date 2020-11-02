@@ -43,7 +43,7 @@ script:
   # Build the frontend first
   - yarn build
   # Then, build the backend
-  - travis_wait 60 tox --develop
+  - travis_wait 160 tox --develop
   # Finally, build the docs
   - travis-sphinx build --nowarn --source=docs
 
