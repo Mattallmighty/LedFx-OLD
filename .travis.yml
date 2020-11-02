@@ -23,11 +23,11 @@ matrix:
 
 language: python
 cache:
+  yarn: true
   directories:
     - $HOME/.cache/pip
     - "node_modules"
     - "frontend"
-    - yarn
     
 before_install:
   - sudo apt-get update
@@ -41,9 +41,8 @@ install:
 
 script:
   # Build the frontend first
+  - yarn
   - yarn build
-  - yarn global add serve
-  - serve -s build
   # Then, build the backend
   - travis_wait 60 tox --develop
   # Finally, build the docs
