@@ -41,7 +41,6 @@ install:
 
 script:
   # Build the frontend first
-  - yarn
   - yarn build
   # Then, build the backend
   - travis_wait 60 tox --develop
